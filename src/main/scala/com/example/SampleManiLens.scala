@@ -17,10 +17,13 @@ object SampleManiLens {
     val _address = Lens[Company, Address](_.address)(a => c => c.copy(address = a))
     val _company = Lens[Employee, Company](_.company)(c => e => e.copy(company = c))
 
+    // 不変ッッ
     val employee = Employee(Company(Address(Street("chuodori"))))
     println((_company composeLens _address composeLens _street composeLens _name) get employee)
-    println((_company composeLens _address composeLens _street composeLens _name).set("hogedori")(employee))
-    println((_company composeLens _address composeLens _street composeLens _name).modify(_.capitalize)(employee))
+    val employeeHoge = (_company composeLens _address composeLens _street composeLens _name).set("hogedori")(employee)
+    println((_company composeLens _address composeLens _street composeLens _name) get employeeHoge)
+    val employeeCap = (_company composeLens _address composeLens _street composeLens _name).modify(_.capitalize)(employee)
+    println((_company composeLens _address composeLens _street composeLens _name) get employeeCap)
     println((_company ^|-> _address ^|-> _street ^|-> _name).modify(_.capitalize)(employee))
 
 
