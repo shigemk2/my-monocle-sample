@@ -1,6 +1,6 @@
 package com.example
 
-import monocle.macros.Lenser
+import monocle.macros.GenLens
 
 
 object SampleLensMacro {
@@ -11,12 +11,10 @@ object SampleLensMacro {
     case class Company(address: Address)
     case class Employee(company: Company)
 
-    val lenser = Lenser[Employee]
-
-    val _name = lenser(_.name)
-    val _street = lenser(_.street)
-    val _address = lenser(_.address)
-    val _company = lenser(_.company)
+    val _name = GenLens[Street](_.name)
+    val _street = GenLens[Address](_.street)
+    val _address = GenLens[Company](_.address)
+    val _company = GenLens[Employee](_.company)
 
     // 不変ッッ
     val employee = Employee(Company(Address(Street("chuodori"))))
