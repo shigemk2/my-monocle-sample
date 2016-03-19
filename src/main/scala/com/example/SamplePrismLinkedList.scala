@@ -1,6 +1,8 @@
 package com.example
 
 import monocle.Prism
+import monocle.function.fields._
+import monocle.std.tuple2._
 
 object SamplePrismLinkedList {
   def main(args: Array[String]): Unit = {
@@ -23,6 +25,21 @@ object SamplePrismLinkedList {
 
     println(l1)
     println(l2)
+
+    // usage of Prism
+    println(_cons.getOption(l1))
+    println(_cons.isMatching(l1))
+    println(_cons.isMatching(l2))
+    println(_cons[Int].modify(_.copy(_1 = 5))(l1))
+    println(_cons[Int].modify(_.copy(_1 = 5))(l2))
+
+    // using Lens
+    println(_cons[Int].modifyOption(_.copy(_1 = 5))(l1))
+    println(_cons[Int].modifyOption(_.copy(_1 = 5))(l2))
+
+    // not use copy, it's annoying
+    println((_cons[Int] composeLens first).set(5)(l1))
+    println((_cons[Int] composeLens first).set(5)(l2))
 
     println("Hello, world!")
   }
