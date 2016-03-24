@@ -1,5 +1,7 @@
 # my-monocle-sample
 
+LensとかPrismとかISOとかが使えるScalaのライブラリ。
+
 ### Official
 
 https://github.com/julien-truffaut/Monocle
