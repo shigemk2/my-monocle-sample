@@ -1,20 +1,22 @@
 package com.example
 
-import monocle.{Iso, Prism}
+import monocle.Iso
 
 object SampleIso {
   def main(args: Array[String]): Unit = {
     sealed trait Day
-    case class Monday(day: Int) extends Day
-    case class Tuesday(day: Int) extends Day
-    case class Wednesday(day: Int) extends Day
-    case class Thursday(day: Int) extends Day
-    case class Friday(day: Int) extends Day
-    case class Saturday(day: Int) extends Day
-    case class Sunday(day: Int) extends Day
-    case class Sample(day: Day)
+    case object Monday extends Day
+    case object Tuesday extends Day
+    case object Wednesday extends Day
+    case object Thursday extends Day
+    case object Friday extends Day
+    case object Saturday extends Day
+    case object Sunday extends Day
 
-    val iso = Iso[Sunday, Int](_.day)(Sunday)
+    val iso = Iso[Day, Unit]{
+      case Tuesday => Some(())
+      case _       => None
+    }(_ => Tuesday)
 
     println(iso)
 
