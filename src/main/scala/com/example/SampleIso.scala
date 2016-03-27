@@ -19,6 +19,8 @@ object SampleIso {
     }(_ => Tuesday)
 
     println(iso)
+    println(iso.reverseGet()) // Tuesday
+    println(iso.modify(println))
 
     println("Hello, world!")
   }
